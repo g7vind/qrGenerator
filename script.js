@@ -1,6 +1,6 @@
 const input = document.getElementById('qr-text');
 const btn = document.getElementById('generate-btn');
-const divi = document.querySelector('.qr-part'); // Use querySelector to select the .qr-part directly
+const divi = document.querySelector('.qr-part');
 let isGenerated = false;
 var prevData = null;
 
