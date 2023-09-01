@@ -1,31 +1,34 @@
 const input = document.getElementById('qr-text');
 const btn = document.getElementById('generate-btn');
-const divi = document.querySelector('.qr-part');
+const divi = document.querySelector('.qr-part'); // Use querySelector to select the .qr-part directly
 let isGenerated = false;
-let prevData = null;
+var prevData = null;
 
 btn.addEventListener('click', () => {
   const data = input.value.trim();
-
   if (data.length > 0) {
     divi.classList.add("active");
-    divi.classList.remove("exit");
-    divi.innerHTML = '';
-    
-    if (prevData === null || data !== prevData) {
-      const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${data}`;
+      divi.classList.remove("exit");
+    if (prevData == null) {
+      prevData = data;
+    }
+    if (data == prevData && isGenerated) {
+      alert("Qr already generated for this text");
+    } else {
+      divi.innerHTML = '';
       const qrimg = document.createElement('img');
-      qrimg.src = qrSrc;
+      qrimg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${data}`;
       qrimg.alt = "QR Code";
       divi.appendChild(qrimg);
       const downBtn = document.createElement('button');
       downBtn.textContent = "Download";
       downBtn.id = "download-btn";
       divi.appendChild(downBtn);
-      downBtn.addEventListener('click', () => {
+      const dwnBtn = document.getElementById('download-btn');
+      dwnBtn.addEventListener('click', () => {
         const link = document.createElement('a');
         link.href = qrimg.src;
-        link.download = "qr.png";
+        link.download = 'qr.png';
         fetch(qrimg.src)
           .then(response => response.blob())
           .then(blob => {
@@ -35,12 +38,11 @@ btn.addEventListener('click', () => {
             window.URL.revokeObjectURL(url);
           });
       });
-
       prevData = data;
       isGenerated = true;
     }
   } else {
-    alert("Please enter some text to generate");
+    alert("please enter some text to generate");
   }
 });
 
@@ -52,5 +54,6 @@ input.addEventListener('keyup', () => {
       divi.innerHTML = '';
     }, 300);
     isGenerated = false;
+    prevData = null;
   }
 });
