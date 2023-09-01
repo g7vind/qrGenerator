@@ -15,7 +15,6 @@ btn.addEventListener('click', () => {
     if (data == prevData && isGenerated) {
       alert("Qr already generated for this text");
     } else {
-      // Add the 'active' class to trigger the transition
       divi.classList.add("active");
       divi.innerHTML = '';
       qrSrc += data;
