@@ -2,22 +2,18 @@ const input = document.getElementById('qr-text');
 const btn = document.getElementById('generate-btn');
 const divi = document.querySelector('.qr-part');
 let isGenerated = false;
-var prevData = null;
+let prevData = null;
 
 btn.addEventListener('click', () => {
   const data = input.value.trim();
-  let qrSrc = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=";
 
   if (data.length > 0) {
-    if (prevData == null) {
-      prevData = data;
-    }
-    if (data == prevData && isGenerated) {
-      alert("Qr already generated for this text");
-    } else {
-      divi.classList.add("active");
-      divi.innerHTML = '';
-      qrSrc += data;
+    divi.classList.add("active");
+    divi.classList.remove("exit");
+    divi.innerHTML = '';
+    
+    if (prevData === null || data !== prevData) {
+      const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${data}`;
       const qrimg = document.createElement('img');
       qrimg.src = qrSrc;
       qrimg.alt = "QR Code";
@@ -26,8 +22,7 @@ btn.addEventListener('click', () => {
       downBtn.textContent = "Download";
       downBtn.id = "download-btn";
       divi.appendChild(downBtn);
-      const dwnBtn = document.getElementById('download-btn');
-      dwnBtn.addEventListener('click', () => {
+      downBtn.addEventListener('click', () => {
         const link = document.createElement('a');
         link.href = qrimg.src;
         link.download = "qr.png";
@@ -40,11 +35,12 @@ btn.addEventListener('click', () => {
             window.URL.revokeObjectURL(url);
           });
       });
+
       prevData = data;
       isGenerated = true;
     }
   } else {
-    alert("please enter some text to generate");
+    alert("Please enter some text to generate");
   }
 });
 
@@ -53,8 +49,8 @@ input.addEventListener('keyup', () => {
     divi.classList.remove("active");
     divi.classList.add("exit");
     setTimeout(() => {
-        divi.innerHTML = '';
-      }, 300);
+      divi.innerHTML = '';
+    }, 300);
     isGenerated = false;
   }
 });
