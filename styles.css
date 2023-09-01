@@ -1,9 +1,8 @@
-/* CSS */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Courier New",Courier,monospace;
   }
   body {
     display: flex;
@@ -12,17 +11,19 @@
     min-height: 100vh;
     background: #2b394c;
   }
+  .container,
+  img {
+    border: 2px solid #4adf86;
+  }
   .container {
     position: relative;
     width: auto;
     height: auto;
     background: #fff;
-    border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
     background-color: transparent;
     border-radius: 20px;
-    border: 2px solid #4adf86;
   }
   h1 {
     color: #fff;
@@ -38,58 +39,41 @@
   .h1-txt {
     color: #4adf86;
   }
-  input[type="text"] {
+  input[type=text] {
     width: 100%;
     height: 30px;
     border-radius: 8px;
     padding: 10px 15px;
     border: 1px solid #aaa;
   }
+  #download-btn,
   #generate-btn {
     width: 100%;
     height: 40px;
     border-radius: 8px;
-    border: none;
+    border: 0;
     background: #4adf86;
     color: #fff;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
-    outline: none;
-    margin-top: 10px;
-  }
-  #download-btn {
-    width: 100%;
-    height: 40px;
-    border-radius: 8px;
-    border: none;
-    background: #4adf86;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    outline: none;
+    outline: 0;
     margin-top: 10px;
   }
   img {
     width: 150px;
     display: block;
     height: 150px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px auto;
     border-radius: 8px;
-    border: 2px solid #4adf86;
   }
-  
   .qr-part {
     display: block;
     align-items: center;
     margin-top: 20px;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.3s ease-in;
+    transition: all .3s ease-in;
   }
   .qr-part.active {
     opacity: 1;
@@ -99,4 +83,3 @@
     opacity: 0;
     transform: translateY(-20px);
   }
-  
