@@ -47,13 +47,11 @@ btn.addEventListener('click', () => {
 });
 
 input.addEventListener('keyup', () => {
-  if (input.value.length === 0) {
-    divi.classList.remove("active");
-    divi.classList.add("exit");
+  divi.classList.remove("active");
+  divi.classList.add("exit");
     setTimeout(() => {
       divi.innerHTML = '';
     }, 300);
     isGenerated = false;
     prevData = null;
-  }
 });
