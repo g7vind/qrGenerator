@@ -3,9 +3,11 @@ const btn = document.getElementById('generate-btn');
 const divi = document.querySelector('.qr-part'); // Use querySelector to select the .qr-part directly
 let isGenerated = false;
 var prevData = null;
+
 btn.addEventListener('click', () => {
   const data = input.value.trim();
   let qrSrc = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=";
+
   if (data.length > 0) {
     if (prevData == null) {
       prevData = data;
@@ -13,6 +15,7 @@ btn.addEventListener('click', () => {
     if (data == prevData && isGenerated) {
       alert("Qr already generated for this text");
     } else {
+      // Add the 'active' class to trigger the transition
       divi.classList.add("active");
       divi.innerHTML = '';
       qrSrc += data;
@@ -49,7 +52,10 @@ btn.addEventListener('click', () => {
 input.addEventListener('keyup', () => {
   if (input.value.length === 0) {
     divi.classList.remove("active");
-    divi.innerHTML = '';
+    divi.classList.add("exit");
+    setTimeout(() => {
+        divi.innerHTML = '';
+      }, 300);
     isGenerated = false;
   }
 });
